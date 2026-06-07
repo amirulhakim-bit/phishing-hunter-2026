@@ -1,0 +1,42 @@
+body {
+    background: #0b0f14;
+    color: #00ff88;
+    font-family: monospace;
+    margin: 0;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+}
+
+.card {
+    background: #111827;
+    padding: 20px;
+    margin-top: 20px;
+    border-left: 4px solid #00ff88;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    background: black;
+    color: #00ff88;
+    border: 1px solid #00ff88;
+}
+
+button {
+    background: #00ff88;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #00cc66;
+}
+
+h1, h2 {
+    color: #00ffcc;
+}

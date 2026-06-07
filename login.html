@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+<h1>🕵️ Cyber Login</h1>
+
+<div class="card">
+<input id="team" placeholder="Enter Team Name">
+<button onclick="login()">Start Mission</button>
+</div>
+
+</div>
+
+<script>
+function login(){
+    let team = document.getElementById("team").value;
+    localStorage.setItem("team", team);
+    localStorage.setItem("score", 0);
+    window.location.href = "station1.html";
+}
+</script>
+
+</body>
+</html>
