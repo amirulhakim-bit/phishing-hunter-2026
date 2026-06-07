@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mission Complete</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+<h1>🎉 MISSION COMPLETE</h1>
+
+<div class="card">
+<p>Your Final Score:</p>
+<h2 id="score"></h2>
+</div>
+
+<div class="card">
+<p>Rank System:</p>
+<p>0–40: Rookie</p>
+<p>50–80: Analyst</p>
+<p>90–120: Cyber Detective</p>
+<p>130+: Elite Phishing Hunter</p>
+</div>
+
+</div>
+
+<script>
+document.getElementById("score").innerText =
+localStorage.getItem("score");
+</script>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Station 1 - Email Attack</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+<h2>📧 Station 1: Fake IT Helpdesk</h2>
+
+<div class="card">
+<p><b>Scenario:</b></p>
+<p>Email: support@micr0soft-security.com</p>
+<p>"Your password will expire in 2 hours. Reset immediately."</p>
+</div>
+
+<div class="card">
+<p><b>Question:</b> What is the main red flag?</p>
+
+<button onclick="correct()">Suspicious domain</button>
+<button onclick="wrong()">Urgent message</button>
+<button onclick="wrong()">Has link</button>
+</div>
+
+<p id="result"></p>
+
+<a href="station2.html">
+<button>Next Station →</button>
+</a>
+
+</div>
+
+<script src="script.js"></script>
+
+<script>
+function correct(){
+    addScore(10);
+    document.getElementById("result").innerHTML = "✔ Correct!";
+}
+
+function wrong(){
+    document.getElementById("result").innerHTML = "✖ Incorrect - think about domain authenticity.";
+}
+</script>
+
+</body>
+</html>
