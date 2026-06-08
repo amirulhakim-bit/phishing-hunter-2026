@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Security Awareness Simulation</title>
+
+<style>
+
+body{
+    margin:0;
+    background:#0b0f14;
+    color:#00ff88;
+    font-family:Consolas, monospace;
+    overflow:hidden;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+    repeating-linear-gradient(
+        transparent,
+        transparent 2px,
+        rgba(0,255,136,.03) 3px
+    );
+    pointer-events:none;
+}
+
+.screen{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.card{
+    width:850px;
+    max-width:90%;
+    background:#111827;
+    border-left:4px solid #00ff88;
+    border-radius:12px;
+    padding:30px;
+    box-shadow:0 0 20px rgba(0,255,136,.2);
+}
+
+h1,h2{
+    color:#00ffcc;
+}
+
+.progress{
+    width:100%;
+    height:25px;
+    background:#0b0f14;
+    border:1px solid #00ff88;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:20px;
+}
+
+.bar{
+    width:0%;
+    height:100%;
+    background:linear-gradient(
+        90deg,
+        #00ff88,
+        #00ffee
+    );
+    transition:.8s;
+}
+
+.status{
+    margin-top:20px;
+    min-height:40px;
+    font-size:18px;
+}
+
+.hidden{
+    display:none;
+}
+
+.alert-screen{
+    position:fixed;
+    inset:0;
+    background:#0b0f14;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    animation:fadeIn .8s;
+}
+
+.alert-box{
+    width:900px;
+    max-width:90%;
+    background:#161b22;
+    border:2px solid #ff4444;
+    border-radius:15px;
+    padding:40px;
+    text-align:center;
+    box-shadow:0 0 50px rgba(255,0,0,.3);
+}
+
+.alert-title{
+    font-size:60px;
+    color:#ff4444;
+    animation:pulse 1.5s infinite;
+}
+
+.risk{
+    margin-top:25px;
+    text-align:left;
+    background:#0d1117;
+    padding:20px;
+    border-radius:10px;
+}
+
+.risk li{
+    margin:12px 0;
+}
+
+button{
+    margin-top:25px;
+    padding:15px 30px;
+    border:none;
+    border-radius:8px;
+    background:#00ff88;
+    color:black;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+.flash{
+    animation:flash .4s infinite;
+}
+
+.lesson{
+    margin-top:20px;
+    background:#0d1117;
+    padding:20px;
+    border-radius:10px;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.05);}
+    100%{transform:scale(1);}
+}
+
+@keyframes flash{
+    0%{background:#0b0f14;}
+    50%{background:#330000;}
+    100%{background:#0b0f14;}
+}
+
+@keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+
+</style>
+</head>
+<body>
+
+<div class="screen" id="simulation">
+
+    <div class="card">
+
+        <h1>GitHub Enterprise</h1>
+
+        <h2>Authentication Successful</h2>
+
+        <p>
+            Welcome back. Please wait while your account
+            information is synchronized.
+        </p>
+
+        <div class="progress">
+            <div class="bar" id="bar"></div>
+        </div>
+
+        <div class="status" id="status">
+            Initializing session...
+        </div>
+
+    </div>
+
+</div>
+
+<div class="alert-screen" id="alert">
+
+    <div class="alert-box">
+
+        <div class="alert-title">
+            ⚠ YOU HAVE BEEN PHISHED
+        </div>
+
+        <p style="font-size:20px;">
+            This was a cybersecurity awareness simulation.
+        </p>
+
+        <p>
+            You trusted a website that appeared legitimate.
+            If this had been a real phishing attack,
+            your credentials could have been compromised.
+        </p>
+
+        <div class="risk">
+
+            <h2>Potential Impact</h2>
+
+            <ul>
+                <li>✓ Account credentials exposed</li>
+                <li>✓ Source code repositories accessed</li>
+                <li>✓ Personal Access Tokens stolen</li>
+                <li>✓ MFA recovery codes targeted</li>
+                <li>✓ Corporate data compromised</li>
+            </ul>
+
+        </div>
+
+        <div class="lesson">
+
+            <h2>What Should You Check?</h2>
+
+            <p>
+                • Verify the domain name carefully<br>
+                • Inspect login URLs before entering credentials<br>
+                • Use MFA wherever possible<br>
+                • Avoid clicking login links from emails<br>
+                • Use a password manager to detect fake sites
+            </p>
+
+        </div>
+
+        <button onclick="location.reload()">
+            Restart Simulation
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+const steps = [
+
+    "Verifying credentials...",
+    "Loading repositories...",
+    "Checking security settings...",
+    "Synchronizing account data...",
+    "Retrieving access tokens...",
+    "Downloading profile information...",
+    "Session established."
+
+];
+
+let current = 0;
+
+function runSimulation(){
+
+    const status =
+        document.getElementById("status");
+
+    const bar =
+        document.getElementById("bar");
+
+    let timer = setInterval(()=>{
+
+        status.innerText =
+            steps[current];
+
+        let percent =
+            ((current+1)/steps.length)*100;
+
+        bar.style.width =
+            percent + "%";
+
+        current++;
+
+        if(current >= steps.length){
+
+            clearInterval(timer);
+
+            setTimeout(()=>{
+
+                document.body.classList
+                    .add("flash");
+
+            },1000);
+
+            setTimeout(()=>{
+
+                document.getElementById(
+                    "simulation"
+                ).style.display="none";
+
+                document.getElementById(
+                    "alert"
+                ).style.display="flex";
+
+            },3000);
+
+        }
+
+    },1200);
+
+}
+
+runSimulation();
+
+</script>
+
+</body>
+</html>
