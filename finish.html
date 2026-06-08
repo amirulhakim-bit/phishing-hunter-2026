@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Final Challenge Complete</title>
+
+<style>
+
+:root{
+    --bg:#0b0f14;
+    --panel:#111827;
+    --accent:#00ff88;
+    --accent2:#00ffcc;
+}
+
+body{
+    margin:0;
+    background:var(--bg);
+    color:var(--accent);
+    font-family:Consolas, monospace;
+    overflow-x:hidden;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+    repeating-linear-gradient(
+        transparent,
+        transparent 2px,
+        rgba(0,255,136,.03) 3px
+    );
+    pointer-events:none;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:30px;
+}
+
+.card{
+    background:var(--panel);
+    border-left:4px solid var(--accent);
+    border-radius:12px;
+    padding:25px;
+    margin-bottom:20px;
+    box-shadow:0 0 20px rgba(0,255,136,.12);
+    animation:slideUp .8s ease;
+}
+
+.hero{
+    text-align:center;
+    padding:40px;
+}
+
+.hero h1{
+    font-size:55px;
+    color:var(--accent2);
+    margin-bottom:10px;
+    animation:glow 2s infinite;
+}
+
+.trophy{
+    font-size:90px;
+    animation:float 3s infinite ease-in-out;
+}
+
+.badge{
+    display:inline-block;
+    margin-top:15px;
+    padding:8px 20px;
+    border:1px solid var(--accent);
+    border-radius:20px;
+}
+
+.progress{
+    width:100%;
+    height:25px;
+    border:1px solid var(--accent);
+    border-radius:30px;
+    overflow:hidden;
+    margin-top:15px;
+}
+
+.bar{
+    width:0%;
+    height:100%;
+    background:
+    linear-gradient(
+        90deg,
+        #00ff88,
+        #00ffee
+    );
+    transition:2s;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+}
+
+.stat{
+    background:#0d1117;
+    padding:20px;
+    border-radius:10px;
+    text-align:center;
+}
+
+.stat h2{
+    margin:0;
+    color:var(--accent2);
+}
+
+.stat p{
+    font-size:32px;
+    margin:10px 0;
+}
+
+.terminal{
+    min-height:220px;
+    white-space:pre-wrap;
+    line-height:1.8;
+}
+
+.lesson{
+    background:#0d1117;
+    border-radius:10px;
+    padding:15px;
+    margin-top:10px;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:8px;
+    background:var(--accent);
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.03);
+    box-shadow:0 0 20px var(--accent);
+}
+
+@keyframes glow{
+    0%{text-shadow:0 0 5px var(--accent);}
+    50%{text-shadow:0 0 25px var(--accent);}
+    100%{text-shadow:0 0 5px var(--accent);}
+}
+
+@keyframes float{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+    100%{transform:translateY(0);}
+}
+
+@keyframes slideUp{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="card hero">
+
+        <div class="trophy">🏆</div>
+
+        <h1>FINAL CHALLENGE COMPLETED</h1>
+
+        <p>
+            You have successfully completed the
+            <strong>Spot the Phishing</strong> challenge.
+        </p>
+
+        <div class="badge">
+            SECURITY AWARENESS PROGRAMME COMPLETED
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Completion Status</h2>
+
+        <div class="progress">
+            <div class="bar" id="progressBar"></div>
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Participant Summary</h2>
+
+        <div class="grid">
+
+            <div class="stat">
+                <h2>Challenges</h2>
+                <p>5/5</p>
+            </div>
+
+            <div class="stat">
+                <h2>Phishing Emails</h2>
+                <p>12</p>
+            </div>
+
+            <div class="stat">
+                <h2>Detected</h2>
+                <p>100%</p>
+            </div>
+
+            <div class="stat">
+                <h2>Status</h2>
+                <p>PASS</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Security Debrief</h2>
+
+        <div id="terminal" class="terminal"></div>
+
+    </div>
+
+    <div class="card">
+
+        <h2>What You Learned</h2>
+
+        <div class="lesson">
+            ✓ Identify suspicious sender addresses
+        </div>
+
+        <div class="lesson">
+            ✓ Detect fake login pages and cloned websites
+        </div>
+
+        <div class="lesson">
+            ✓ Recognize urgent language and social engineering
+        </div>
+
+        <div class="lesson">
+            ✓ Verify URLs before entering credentials
+        </div>
+
+        <div class="lesson">
+            ✓ Understand the consequences of phishing attacks
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Final Message</h2>
+
+        <p>
+            Cybersecurity is not a one-time activity.
+            Every login, email, attachment, and link
+            should be treated with awareness and caution.
+        </p>
+
+        <button onclick="showCertificate()">
+            COMPLETE PROGRAMME
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+setTimeout(()=>{
+    document.getElementById("progressBar").style.width = "100%";
+},500);
+
+const logs = [
+
+"[SUCCESS] Final challenge completed.",
+"[INFO] Evaluating phishing detection performance...",
+"[SUCCESS] No critical mistakes detected.",
+"[INFO] Reviewing awareness training outcomes...",
+"[SUCCESS] Training objectives achieved.",
+"[INFO] Generating completion record...",
+"[SUCCESS] Participant successfully completed programme.",
+"[READY] Security awareness level improved."
+
+];
+
+let current = 0;
+
+function typeLogs(){
+
+    if(current >= logs.length)
+        return;
+
+    let terminal =
+        document.getElementById("terminal");
+
+    let row =
+        document.createElement("div");
+
+    terminal.appendChild(row);
+
+    let text = logs[current];
+    let i = 0;
+
+    let timer = setInterval(()=>{
+
+        row.textContent += text[i];
+        i++;
+
+        if(i >= text.length){
+
+            clearInterval(timer);
+            current++;
+
+            setTimeout(typeLogs,500);
+
+        }
+
+    },20);
+
+}
+
+typeLogs();
+
+function showCertificate(){
+
+    document.body.innerHTML = `
+    <div style="
+        height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        flex-direction:column;
+        background:#0b0f14;
+        color:#00ff88;
+        font-family:Consolas,monospace;
+    ">
+        <h1 style="font-size:60px;">🎓</h1>
+        <h1>PROGRAMME COMPLETED</h1>
+        <p>You successfully completed the</p>
+        <p><strong>Spot the Phishing Security Awareness Challenge</strong></p>
+        <br>
+        <p>Stay vigilant. Think before you click.</p>
+    </div>`;
+}
+
+</script>
+
+</body>
+</html>
