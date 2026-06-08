@@ -218,6 +218,10 @@ button:hover{
             <span id="team"></span>
         </p>
 
+        <p>
+            Score:
+            <span id="score"></span>
+        </p>
 
         <div class="progress-wrapper">
             <div class="progress-bar" id="progressBar"></div>
@@ -259,7 +263,7 @@ if(!localStorage.getItem("team")){
 }
 
 if(!localStorage.getItem("score")){
-    localStorage.setItem("score",100);
+    localStorage.setItem("score","TBA");
 }
 
 /* load team info */
@@ -372,7 +376,7 @@ function nextTask(){
 
                 /* change this */
                 window.location.href =
-                    "index2.html";
+                    "index4.html";
 
             },1000);
         }
