@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mission Complete</title>
+
+<style>
+
+body{
+    background:#0b0f14;
+    color:#00ff88;
+    font-family:Consolas,monospace;
+    margin:0;
+    overflow-x:hidden;
+}
+
+/* Background scanlines */
+body::before{
+    content:"";
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:
+    repeating-linear-gradient(
+        transparent,
+        transparent 2px,
+        rgba(0,255,136,0.03) 3px
+    );
+    pointer-events:none;
+    z-index:999;
+}
+
+/* floating particles */
+.particle{
+    position:fixed;
+    color:#00ff88;
+    opacity:.15;
+    animation:float 15s linear infinite;
+    pointer-events:none;
+}
+
+.container{
+    width:80%;
+    max-width:900px;
+    margin:auto;
+    padding:30px;
+    animation:fadeIn 1s ease;
+}
+
+.card{
+    background:#111827;
+    border-left:4px solid #00ff88;
+    padding:20px;
+    margin-top:20px;
+    border-radius:12px;
+    box-shadow:0 0 20px rgba(0,255,136,.15);
+    animation:slideUp .8s ease;
+}
+
+.success-icon{
+    text-align:center;
+    font-size:90px;
+    color:#00ff88;
+    animation:pop 1s ease;
+}
+
+.complete-title{
+    text-align:center;
+    color:#00ffcc;
+    animation:glow 2s infinite;
+}
+
+.center{
+    text-align:center;
+}
+
+.progress-wrapper{
+    width:100%;
+    height:25px;
+    border:1px solid #00ff88;
+    border-radius:30px;
+    overflow:hidden;
+    margin-top:10px;
+}
+
+.progress-bar{
+    width:0%;
+    height:100%;
+    background:
+    linear-gradient(
+        90deg,
+        #00ff88,
+        #00ffee
+    );
+    box-shadow:0 0 20px #00ff88;
+    transition:2s;
+}
+
+.terminal{
+    min-height:150px;
+    white-space:pre-wrap;
+    line-height:1.8;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:8px;
+    background:#00ff88;
+    color:black;
+    font-weight:bold;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.03);
+    box-shadow:0 0 25px #00ff88;
+}
+
+.badge{
+    display:inline-block;
+    padding:5px 10px;
+    border:1px solid #00ff88;
+    border-radius:20px;
+    margin-bottom:10px;
+}
+
+@keyframes glow{
+    0%{
+        text-shadow:0 0 5px #00ff88;
+    }
+    50%{
+        text-shadow:0 0 25px #00ff88;
+    }
+    100%{
+        text-shadow:0 0 5px #00ff88;
+    }
+}
+
+@keyframes slideUp{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes pop{
+    0%{
+        transform:scale(0);
+        opacity:0;
+    }
+    100%{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+    }
+    to{
+        opacity:1;
+    }
+}
+
+@keyframes float{
+    from{
+        transform:translateY(100vh);
+    }
+    to{
+        transform:translateY(-100px);
+    }
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+        <h1 class="complete-title">
+            MISSION COMPLETE
+        </h1>
+
+        <p class="center">
+            Today's cybersecurity challenge has been completed successfully.
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <div class="badge">
+            STATUS: SUCCESS
+        </div>
+
+        <h2>Mission Statistics</h2>
+
+        <p>
+            Team:
+            <span id="team"></span>
+        </p>
+
+        <p>
+            Score:
+            <span id="score"></span>
+        </p>
+
+        <div class="progress-wrapper">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <p id="progressText"></p>
+
+    </div>
+
+    <div class="card">
+
+        <h2>System Log</h2>
+
+        <div class="terminal" id="terminal"></div>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Next Objective</h2>
+
+        <p>
+            Continue to the next task and advance your investigation.
+        </p>
+
+        <button onclick="nextTask()" id="nextBtn">
+            PROCEED TO NEXT TASK →
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+/* sample values */
+if(!localStorage.getItem("team")){
+    localStorage.setItem("team","Cyber Defenders");
+}
+
+if(!localStorage.getItem("score")){
+    localStorage.setItem("score","85");
+}
+
+/* load team info */
+const team =
+    localStorage.getItem("team");
+
+const score =
+    parseInt(localStorage.getItem("score"));
+
+document.getElementById("team").textContent =
+    team;
+
+document.getElementById("score").textContent =
+    score;
+
+/* animate progress bar */
+setTimeout(()=>{
+    document.getElementById("progressBar")
+        .style.width = Math.min(score,100)+"%";
+
+    document.getElementById("progressText")
+        .textContent =
+        "Mission Progress: " +
+        Math.min(score,100) +
+        "%";
+},500);
+
+/* terminal typing effect */
+const logs = [
+    "[SUCCESS] Mission completed.",
+    "[INFO] Uploading results...",
+    "[SUCCESS] Results synchronized.",
+    "[INFO] Validating score...",
+    "[SUCCESS] Score verified.",
+    "[INFO] Updating leaderboard...",
+    "[SUCCESS] Leaderboard updated.",
+    "[INFO] Preparing next challenge...",
+    "[READY] Awaiting participant action."
+];
+
+let logIndex = 0;
+
+function typeLog(){
+
+    if(logIndex >= logs.length)
+        return;
+
+    let line =
+        document.createElement("div");
+
+    document.getElementById("terminal")
+        .appendChild(line);
+
+    let text = logs[logIndex];
+    let i = 0;
+
+    let typing = setInterval(()=>{
+
+        line.textContent += text[i];
+        i++;
+
+        if(i >= text.length){
+
+            clearInterval(typing);
+
+            logIndex++;
+
+            setTimeout(typeLog,500);
+        }
+
+    },25);
+
+}
+
+typeLog();
+
+/* proceed button */
+function nextTask(){
+
+    let btn =
+        document.getElementById("nextBtn");
+
+    btn.disabled = true;
+
+    let count = 3;
+
+    btn.textContent =
+        "NEXT MISSION IN " +
+        count;
+
+    let timer = setInterval(()=>{
+
+        count--;
+
+        if(count > 0){
+
+            btn.textContent =
+                "NEXT MISSION IN " +
+                count;
+
+        }
+        else{
+
+            clearInterval(timer);
+
+            btn.textContent =
+                "LOADING NEXT TASK...";
+
+            setTimeout(()=>{
+
+                /* change this */
+                window.location.href =
+                    "task2.html";
+
+            },1000);
+        }
+
+    },1000);
+
+}
+
+/* floating particles */
+for(let i=0;i<25;i++){
+
+    let p =
+        document.createElement("div");
+
+    p.className =
+        "particle";
+
+    p.innerHTML =
+        Math.random() > 0.5
+        ? "0"
+        : "1";
+
+    p.style.left =
+        Math.random()*100 + "%";
+
+    p.style.fontSize =
+        (10 + Math.random()*20)
+        + "px";
+
+    p.style.animationDuration =
+        (8 + Math.random()*15)
+        + "s";
+
+    document.body.appendChild(p);
+}
+
+</script>
+
+</body>
+</html>
