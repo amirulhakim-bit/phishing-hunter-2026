@@ -96,7 +96,7 @@ body::before{
         #00ffee
     );
     box-shadow:0 0 20px #00ff88;
-    transition:2s;
+    animation:fillBar 3s ease-out forwards;
 }
 
 .terminal{
@@ -183,6 +183,15 @@ button:hover{
     }
 }
 
+@keyframes fillBar{
+    from{
+        width:0%;
+    }
+    to{
+        width:100%;
+    }
+}
+
 </style>
 </head>
 <body>
@@ -218,16 +227,9 @@ button:hover{
             <span id="team"></span>
         </p>
 
-        <p>
-            Score:
-            <span id="score"></span>
-        </p>
-
         <div class="progress-wrapper">
             <div class="progress-bar" id="progressBar"></div>
         </div>
-
-        <p id="progressText"></p>
 
     </div>
 
@@ -262,34 +264,12 @@ if(!localStorage.getItem("team")){
     localStorage.setItem("team","Cyber Defenders");
 }
 
-if(!localStorage.getItem("score")){
-    localStorage.setItem("score","TBA");
-}
-
 /* load team info */
 const team =
     localStorage.getItem("team");
 
-const score =
-    parseInt(localStorage.getItem("score"));
-
 document.getElementById("team").textContent =
     team;
-
-document.getElementById("score").textContent =
-    score;
-
-/* animate progress bar */
-setTimeout(()=>{
-    document.getElementById("progressBar")
-        .style.width = Math.min(score,100)+"%";
-
-    document.getElementById("progressText")
-        .textContent =
-        "Mission Progress: " +
-        Math.min(score,100) +
-        "%";
-},500);
 
 /* terminal typing effect */
 const logs = [
