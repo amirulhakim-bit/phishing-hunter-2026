@@ -249,7 +249,7 @@ button:hover{
     <div class="card">
 
         <button onclick="finishDay()" id="finishBtn">
-            FINISH TODAY'S SESSION
+            Search for Your QR
         </button>
 
     </div>
@@ -324,7 +324,7 @@ function finishDay(){
     let countdown = 3;
 
     btn.textContent =
-        "SESSION ENDING IN " + countdown;
+        "Start your challenge " + countdown;
 
     let timer = setInterval(()=>{
 
@@ -333,7 +333,7 @@ function finishDay(){
         if(countdown > 0){
 
             btn.textContent =
-                "SESSION ENDING IN " + countdown;
+                "START YOUR SESSION " + countdown;
 
         }
         else{
@@ -356,9 +356,9 @@ function finishDay(){
                     font-family:Consolas,monospace;
                     background:#0b0f14;
                 ">
-                    <h1>✓ SESSION COMPLETE</h1>
-                    <p>You have finished today's activities.</p>
-                    <p>See you in the next session.</p>
+                    <h1>✓ SESSION START</h1>
+                    <p>You have joining our cyber defence team.</p>
+                    <p>See you in the session.</p>
                 </div>`;
             },1000);
         }
